@@ -9,8 +9,8 @@ function Pays() {
 
         const fetchPays = async () => {
             const res = await fetch('http://localhost:3005/pays');
-            const donnee = await res.json()
-            setDonnee(donnee);
+            const pkg = await res.json()
+            setDonnee(pkg);
             
         }
 
@@ -18,10 +18,11 @@ function Pays() {
 
     },[])
 
+    console.log(donnee)
 
     return (
         <div className="Pays">
-            <ListePays props={donnee}/>
+            <ListePays donnee={donnee} />
         </div>
     );
 }

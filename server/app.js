@@ -13,24 +13,16 @@ app.get('/pays', (req, res) => {
 })
 
 app.get('/langue', (req, res) => {
-    const input = req.query.continent.replace('+', ' ');
+    const input = req.query.continent.replace('+', ' '); 
 
     let langues = [];
 
-    const languesDejaInclue = (array, langue) => {
-        langue.forEach(element => {
-            if (!array.includes(element)) {
-                array.push(element)
-            }
-        })
-    }
+    pays.forEach(elem => {
+        if(!langues.includes(...elem.langues_officielles) && elem.continent.toLowerCase() === input.toLowerCase())
+            langues.push(...elem.langues_officielles)
+    })
 
-    for (let i = 0; i < pays.length; i++) {
-        if (pays[i].continent.toLowerCase() === input)
-            languesDejaInclue(langues, pays[i].langues_officielles)
-    }
-    const donnee = JSON.stringify(langues);
-    res.send(donnee);
+    res.send(langues);
 
 })
 

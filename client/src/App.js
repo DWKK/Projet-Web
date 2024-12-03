@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Pays from './Pays'
+import ListeLangues from './ListeLangues';
 
 function App() {
 
@@ -12,6 +14,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Navigate to="/pays" />} />
           <Route path="/pays" element={<Pays />} />
+          <Route path="/langues" element={<ListeLangues />} />
         </Routes>
         {/*<Footer />*/}
       </BrowserRouter>
