@@ -2,29 +2,33 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3005
+const PORT = 3005;
 
 app.use(cors());
 
 const pays = require("./pays.json").pays;
 
-app.get('/pays', (req, res) => {
-    res.send(pays.map(element => {return element}));
-})
-
-app.get('/langue', (req, res) => {
-    const input = req.query.continent.replace('+', ' '); 
-
-    let langues = [];
-
-    pays.forEach(elem => {
-        if(!langues.includes(...elem.langues_officielles) && elem.continent.toLowerCase() === input.toLowerCase())
-            langues.push(...elem.langues_officielles)
+app.get("/pays", (_req, res) => {
+  res.send(
+    pays.map((element) => {
+      return element;
     })
+  );
+});
 
-    res.send(langues);
+app.get("/langues", (req, res) => {
+  const input = req.query.continent.replace("+", " ");
 
-})
+  let langues = [];
 
-app.listen(PORT, () => console.log(`Écoute sur le port ${PORT}`))
+  pays.forEach((elem) => {
+    if (elem.continent.toLowerCase() === input.toLowerCase())
+      elem.langues_officielles.forEach((langue) => {
+        if (!langues.includes(langue)) langues.push(langue);
+      });
+  });
 
+  res.send(langues);
+});
+
+app.listen(PORT, () => console.log(`Écoute sur le port ${PORT}`));

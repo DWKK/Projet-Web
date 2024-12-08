@@ -1,22 +1,26 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Pays from './Pays'
-import ListeLangues from './ListeLangues';
+import React from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./Header";
+import Pays from "./Pays";
+import Langues from "./Langues";
+import Footer from "./Footer";
 
 function App() {
-
   return (
-    <div className="App" style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+    <div
+      className="App"
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <BrowserRouter>
-        {/*<Header />*/}
+        <Header />
         <Routes>
           <Route exact path="/" element={<Navigate to="/pays" />} />
           <Route path="/pays" element={<Pays />} />
-          <Route path="/langues" element={<ListeLangues />} />
+          <Route path="/langues" element={<Langues />} />
         </Routes>
-        {/*<Footer />*/}
+        <Footer />
       </BrowserRouter>
     </div>
   );
