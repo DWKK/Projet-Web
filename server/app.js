@@ -2,37 +2,33 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3005
+const PORT = 3005;
 
 app.use(cors());
 
 const pays = require("./pays.json").pays;
 
-app.get('/pays', (req, res) => {
-    res.send(pays.map(element => {return element}));
-})
+app.get("/pays", (_req, res) => {
+  res.send(
+    pays.map((element) => {
+      return element;
+    })
+  );
+});
 
-app.get('/langue', (req, res) => {
-    const input = req.query.continent.replace('+', ' ');
+app.get("/langues", (req, res) => {
+  const input = req.query.continent.replace("+", " ");
 
-    let langues = [];
+  let langues = [];
 
-    const languesDejaInclue = (array, langue) => {
-        langue.forEach(element => {
-            if (!array.includes(element)) {
-                array.push(element)
-            }
-        })
-    }
+  pays.forEach((elem) => {
+    if (elem.continent.toLowerCase() === input.toLowerCase())
+      elem.langues_officielles.forEach((langue) => {
+        if (!langues.includes(langue)) langues.push(langue);
+      });
+  });
 
-    for (let i = 0; i < pays.length; i++) {
-        if (pays[i].continent.toLowerCase() === input)
-            languesDejaInclue(langues, pays[i].langues_officielles)
-    }
-    const donnee = JSON.stringify(langues);
-    res.send(donnee);
+  res.send(langues);
+});
 
-})
-
-app.listen(PORT, () => console.log(`Écoute sur le port ${PORT}`))
-
+app.listen(PORT, () => console.log(`Écoute sur le port ${PORT}`));
