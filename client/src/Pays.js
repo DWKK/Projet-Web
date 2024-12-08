@@ -19,10 +19,9 @@ function Pays() {
     fetchPays();
   }, []);
 
-  const handleQuery = (e) => {
+  const handleQuery = async (e) => {
     setQuery(e.target.value);
-    console.log(e.target.value);
-    //console.log(query.valueOf());
+    console.log(`query in handleQuery:${query}`);
   };
 
   const handleContinentSelect = (e) => {
@@ -72,7 +71,7 @@ function Pays() {
       </div>
       <ListePays
         donnee={donnee}
-        query={query.valueOf()}
+        query={query}
         continent={continentSelect}
         tri={triSelect}
       />
