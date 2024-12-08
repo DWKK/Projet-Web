@@ -21,7 +21,6 @@ function Pays() {
 
   const handleQuery = async (e) => {
     setQuery(e.target.value);
-    console.log(`query in handleQuery:${query}`);
   };
 
   const handleContinentSelect = (e) => {
@@ -30,6 +29,11 @@ function Pays() {
 
   const handleTriSelect = (e) => {
     setTriSelect(e);
+
+    if (e === "Tri Par Ordre Alphabétique")
+      donnee.sort((a, b) => a.nom.localeCompare(b.nom));
+    if (e === "Tri Par Population")
+      donnee.sort((a, b) => b.population - a.population);
   };
 
   return (
@@ -69,12 +73,7 @@ function Pays() {
           </DropdownButton>
         </Dropdown>
       </div>
-      <ListePays
-        donnee={donnee}
-        query={query}
-        continent={continentSelect}
-        tri={triSelect}
-      />
+      <ListePays donnee={donnee} query={query} continent={continentSelect} />
     </div>
   );
 }

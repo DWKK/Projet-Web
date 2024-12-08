@@ -1,7 +1,6 @@
 import Accordion from "react-bootstrap/Accordion";
 // gives an error, props is wrong
-const ListePays = ({ donnee, query, continent, tri }) => {
-  console.log(`query in child: ${query}`);
+const ListePays = ({ donnee, query, continent }) => {
   const formatPopulation = (population) => {
     return new Intl.NumberFormat("fr", {
       style: "decimal",
@@ -15,9 +14,11 @@ const ListePays = ({ donnee, query, continent, tri }) => {
       <Accordion>
         {donnee
           .filter((elem) => {
-            return elem.nom
-              .toLowerCase()
-              .includes(query.toString().toLowerCase());
+            return (
+              elem.nom.toLowerCase().includes(query.toString().toLowerCase()) &&
+              (elem.continent === continent ||
+                continent === "Tous Les Continents")
+            );
           })
           .map((pays, index) => {
             return (
